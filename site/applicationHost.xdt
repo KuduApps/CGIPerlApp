@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <system.webServer>
+    <security>
+      <isapiCgiRestriction>
+        <add description="cgi-perl" xdt:Locator="Match(description)" xdt:Transform="RemoveAll" />
+        <add path="&quot;%ProgramFiles(x86)%\Git\bin\perl.exe&quot; -T &quot;%s&quot; %s" allowed="true" description="cgi-perl" xdt:Transform="Insert" />
+      </isapiCgiRestriction>
+    </security>
+  </system.webServer>
+  <location path="%XDT_SITENAME%" xdt:Locator="Match(path)">
+    <system.webServer>
+      <handlers accessPolicy="Read, Script" xdt:Locator="Match(accessPolicy)" xdt:Transform="InsertIfMissing">
+        <add name="cgi-perl" xdt:Locator="Match(name)" xdt:Transform="RemoveAll" />
+        <add name="cgi-perl" path="*.pl" verb="*" modules="CgiModule" scriptProcessor="&quot;%ProgramFiles(x86)%\Git\bin\perl.exe&quot; -T &quot;%s&quot; %s" resourceType="Unspecified" xdt:Transform="Insert" />
+      </handlers>
+    </system.webServer>
+  </location>
+  <location overrideMode="Deny" xdt:Locator="Match(overrideMode)">
+    <system.webServer>
+      <cgi createProcessAsUser="false" xdt:Transform="SetAttributes(createProcessAsUser)" />
+    </system.webServer>
+  </location>
+</configuration>
