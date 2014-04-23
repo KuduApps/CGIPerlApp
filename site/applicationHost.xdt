@@ -7,6 +7,7 @@
         <add path="&quot;%ProgramFiles(x86)%\Git\bin\perl.exe&quot; -T &quot;%s&quot; %s" allowed="true" description="cgi-perl" xdt:Transform="Insert" />
       </isapiCgiRestriction>
     </security>
+    <cgi createProcessAsUser="false" xdt:Transform="SetAttributes(createProcessAsUser)" />
   </system.webServer>
   <location path="%XDT_SITENAME%" xdt:Locator="Match(path)">
     <system.webServer>
@@ -14,11 +15,6 @@
         <add name="cgi-perl" xdt:Locator="Match(name)" xdt:Transform="RemoveAll" />
         <add name="cgi-perl" path="*.pl" verb="*" modules="CgiModule" scriptProcessor="&quot;%ProgramFiles(x86)%\Git\bin\perl.exe&quot; -T &quot;%s&quot; %s" resourceType="Unspecified" xdt:Transform="Insert" />
       </handlers>
-    </system.webServer>
-  </location>
-  <location overrideMode="Deny" xdt:Locator="Match(overrideMode)">
-    <system.webServer>
-      <cgi createProcessAsUser="false" xdt:Transform="SetAttributes(createProcessAsUser)" />
     </system.webServer>
   </location>
 </configuration>
